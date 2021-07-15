@@ -39,6 +39,7 @@
         <div>
             <label for="tel">tel input type:</label>
             <input type="tel" name="tel" id="tel">
+            <error-output class="tel-error" for="tel"></error-output>
         </div>
         <div>
             <label for="search">search input type:</label>
@@ -80,6 +81,17 @@
             }
         });
 
+        const tel = document.querySelector('#tel');
+        const telError = document.querySelector('.tel-error');
+        tel.addEventListener('blur', function () {
+            let telRegex = RegExp('^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$');
+            if (telRegex.test(tel.value)) {
+                telError.textContent = "";
+            } else {
+                telError.textContent = "Phone number is incorrect";
+            }
+        });
+        
         const salary = document.querySelector('#salary');
         const output = document.querySelector('.salary-output');
         output.textContent = salary.value;
